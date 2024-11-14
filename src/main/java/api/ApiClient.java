@@ -44,13 +44,10 @@ public class ApiClient {
     }
 
     public Response sendRequestWithBaseOnly(String path, String base) {
-        Map<String, String> queryParams = new HashMap<>();
-        queryParams.put("base", base);
-
         return given()
                 .spec(getRequestSpecification(path))
                 .header("apikey", apiKey)
-                .queryParams(queryParams)
+                .queryParam("base", base)
                 .get();
     }
 
@@ -62,13 +59,10 @@ public class ApiClient {
     }
 
     public Response sendRequestWithSymbolsOnly(String path, String symbols) {
-        Map<String, String> queryParams = new HashMap<>();
-        queryParams.put("symbols", symbols);
-
         return given()
                 .spec(getRequestSpecification(path))
                 .header("apikey", apiKey)
-                .queryParams(queryParams)
+                .queryParam("symbols", symbols)
                 .get();
     }
 

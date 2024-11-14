@@ -42,11 +42,10 @@ public class ApiLayerLatestEndpointSteps {
     public void verifyResponseContainsRatesForSymbols(String symbols) {
         ApiLayerLatestResponseDto responseDto = apiClient.response.then().extract().as(ApiLayerLatestResponseDto.class);
         String[] splitSymbols = symbols.split(",");
-        assertAll("symbols",
-                () -> assertNotNull(responseDto.getRates().get(splitSymbols[0])),
-                () -> assertNotNull(responseDto.getRates().get(splitSymbols[1])),
-                () -> assertNotNull(responseDto.getRates().get(splitSymbols[2]))
-        );
+
+        for (String str : splitSymbols) {
+            assertNotNull(responseDto.getRates().get(str));
+        }
     }
 
     @And("the response should contain a valid timestamp")
